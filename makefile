@@ -1,4 +1,4 @@
-EXECS = hello loops memory calling external add42 fib reverse
+EXECS = hello loops memory calling external add42 fib reverse sqrt sqrt_minified
 
 hello: clean
 	nasm -f elf32 hello.asm -o hello.o
@@ -31,6 +31,14 @@ fib: clean
 reverse: clean
 	nasm -f elf32 reverse.asm -o reverse.o
 	gcc -m32 reverse.o -o reverse
+
+sqrt: clean
+	nasm -f elf32 sqrt.asm -o sqrt.o
+	gcc -m32 sqrt.o -o sqrt
+
+sqrt_minified: clean
+	nasm -f elf32 sqrt_minified.asm -o sqrt_minified.o
+	ld -m elf_i386 sqrt_minified.o -o sqrt_minified
 
 clean:
 	rm -f *.o $(EXECS)
